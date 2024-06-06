@@ -22,7 +22,7 @@ const HomeFilters = () => {
         >
           {item.name}
         </Button>
-      ))}
+      ))} 
     </div>
   );
 };

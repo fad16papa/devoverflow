@@ -20,6 +20,7 @@ import { Input } from "@/components/ui/input";
 import { QuestionsSchema } from "@/lib/validations";
 import { Badge } from "../ui/badge";
 import Image from "next/image";
+import { createQuestion } from "@/lib/actions/question.action";
 
 const type: any = "create";
 
@@ -38,11 +39,13 @@ const Question = () => {
   });
 
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof QuestionsSchema>) {
+  async function onSubmit(values: z.infer<typeof QuestionsSchema>) {
     setIsSubmitting(true);
 
     try {
       // Handle the form submission here.
+      await createQuestion({});
+      console.log("im here");
     } catch (error) {
     } finally {
       setIsSubmitting(false);
@@ -104,7 +107,7 @@ const Question = () => {
                   {...field}
                 />
               </FormControl>
-              <FormDescription className="body-regular mt-2.5 text-light-500">
+              <FormDescription className="body-regular text-light-500 mt-2.5">
                 Be specific and imagine you&apos;re asking a question to another
                 person.
               </FormDescription>
@@ -159,7 +162,7 @@ const Question = () => {
                   }}
                 />
               </FormControl>
-              <FormDescription className="body-regular mt-2.5 text-light-500">
+              <FormDescription className="body-regular text-light-500 mt-2.5">
                 Introduce the problem and expand on what you put in the title.
                 Minimum 20 characters.
               </FormDescription>
@@ -207,7 +210,7 @@ const Question = () => {
                   )}
                 </>
               </FormControl>
-              <FormDescription className="body-regular mt-2.5 text-light-500">
+              <FormDescription className="body-regular text-light-500 mt-2.5">
                 Add up to 3 tags to describe what your question is about. You
                 need to press enter to add a tag
               </FormDescription>
@@ -216,7 +219,7 @@ const Question = () => {
           )}
         />
         <Button
-          className="primary-gradient w-fit !text-light-900"
+          className="primary-gradient !text-light-900 w-fit"
           type="submit"
           disabled={isSubmitting}
         >
