@@ -5,65 +5,16 @@ import Filter from "@/components/shared/search/Filter";
 import LocalSearchbar from "@/components/shared/search/LocalSearchbar";
 import { Button } from "@/components/ui/button";
 import { HomePageFilters } from "@/constants/filters";
+import { getQuestions } from "@/lib/actions/question.action";
 import Link from "next/link";
 import React from "react";
 
-const questions = [
-  {
-    _id: "1",
-    title: "Cascading Deletes in SQL Alchemy",
-    tags: [
-      {
-        _id: "1",
-        name: "python",
-      },
-      {
-        _id: "2",
-        name: "sql",
-      },
-    ],
-    author: {
-      _id: "1",
-      name: "John Doe",
-      picture: "path/to/picture.jpg", // Adjust with the actual picture path
-    },
-    upvotes: 10000000,
-    views: 809890890,
-    answers: [
-      {}, // Example answer object
-      {}, // Example answer object
-    ],
-    createdAt: new Date("2023-09-01T12:00:00.000Z"),
-  },
-  {
-    _id: "2",
-    title: "How to center a div",
-    tags: [
-      {
-        _id: "1",
-        name: "css",
-      },
-      {
-        _id: "2",
-        name: "html",
-      },
-    ],
-    author: {
-      _id: "1",
-      name: "John Doe",
-      picture: "path/to/picture.jpg", // Adjust with the actual picture path
-    },
-    upvotes: 234234,
-    views: 32423,
-    answers: [
-      {}, // Example answer object
-      {}, // Example answer object
-    ],
-    createdAt: new Date("2023-09-01T12:00:00.000Z"),
-  },
-];
+export default async function Home () {
 
-const Home = () => {
+  const questions = await getQuestions({});
+
+  console.log(questions);
+
   return (
     <>
       <div className="flex w-full flex-col-reverse justify-between gap-4 sm:flex-row sm:items-center">
@@ -120,5 +71,3 @@ const Home = () => {
     </>
   );
 };
-
-export default Home;

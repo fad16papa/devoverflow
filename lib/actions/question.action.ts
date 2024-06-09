@@ -3,14 +3,34 @@
 import Question from "@/database/question.mode";
 import { connectToDatabase } from "../mongoose";
 import Tag from "@/database/tag.model";
+import { CreateQuestionParams, GetQuestionsParams } from "./shared.types";
+import User from "@/database/user.model";
+import { revalidatePath } from "next/cache";
 
-export async function createQuestion(params: any) {
+export async function getQuestions(params: GetQuestionsParams) {
+  // Get all questions
+  try {
+    connectToDatabase();
+
+    const questions = await Question.find({})
+    .populate({ path: 'tags', model: Tag })
+    .populate({ path: 'author', model: User })
+    .sort({ createdAt: -1 });
+
+    return questions;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
+
+export async function createQuestion(params: CreateQuestionParams) {
   // Create a new question
   // eslint-disable-next-line no-empty
   try {
     connectToDatabase();
 
-    const { title, content, tags, author } = params;
+    const { title, content, tags, author, path } = params;
 
     // Create a new question
     const question = await Question.create({ title, content, author });
@@ -32,5 +52,10 @@ export async function createQuestion(params: any) {
     });
 
     // create an interaction record for the user's ask_question action
-  } catch (error) {}
+
+    revalidatePath(path);
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
 }
