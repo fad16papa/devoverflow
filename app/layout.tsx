@@ -19,7 +19,7 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "Next.js 14 with clerk",
+  title: "DevOverFlow",
   description:
     "A co-working web app space for developers to share and collaborate on projects, ideas, knwoledge and more.",
   icons: {
