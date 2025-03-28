@@ -1,6 +1,6 @@
 "use server";
 
-import Question from "@/database/question.mode";
+import Question from "@/database/question.model";
 import { connectToDatabase } from "../mongoose";
 import Tag from "@/database/tag.model";
 import { CreateQuestionParams, GetQuestionsParams } from "./shared.types";
