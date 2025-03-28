@@ -70,7 +70,7 @@ export async function deleteUser(params: any) {
       "_id"
     );
 
-    // de;ete user questions
+    // delete user questions
     await Question.deleteMany({ author: user._id });
 
     // TODO: delete user answers, comments etc.
